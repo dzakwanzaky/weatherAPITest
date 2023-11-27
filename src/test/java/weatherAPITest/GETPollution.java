@@ -18,24 +18,24 @@ public class GETPollution {
 		Response response = getPollutionResponse();
 
 		// Assert the status code
-	    Assert.assertEquals("Unexpected status code", 200, response.getStatusCode());
-	    
-	    // Validate JSON schema
-	    response.then().assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("success_get_pollution.json"));
+		Assert.assertEquals("Unexpected status code", 200, response.getStatusCode());
 
+		// Validate JSON schema
+		response.then().assertThat()
+				.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("success_get_pollution.json"));
 
 		JsonPath jsonPath = new JsonPath(response.asString());
 		String aqi = jsonPath.getString("list[0].main.aqi");
-		
-	    boolean isLondonAirGood = aqi.equals("1");
-	    
-		 // Check if the assertion passed
-	    if (isLondonAirGood) {
-	        System.out.println("Today's Air Quality Index in London is good.");
-	    }
 
-	    // Assert that the condition is true
-	    Assert.assertTrue(isLondonAirGood);
+		boolean isLondonAirGood = aqi.equals("1");
+
+		// Check if the assertion passed
+		if (isLondonAirGood) {
+			System.out.println("Today's Air Quality Index in London is good.");
+		}
+
+		// Assert that the condition is true
+		Assert.assertTrue(isLondonAirGood);
 	}
 
 	private Response getPollutionResponse() {

@@ -27,13 +27,13 @@ public class GETForecast {
 		JsonPath jsonPath = new JsonPath(response.asString());
 		String temp = jsonPath.getString("list[0].main.temp");
 		String feels_like = jsonPath.getString("list[0].main.feels_like");
-		
 
 		boolean isLondonTemp = temp.equals("279.16") && feels_like.equals("275.67");
 
 		// Check if the assertion passed
 		if (isLondonTemp) {
-			System.out.println("Today's temperature in London is at 279.13 deg Celcius and it feels like 275.64 deg Celcius.");
+			System.out.println(
+					"Today's temperature in London is at 279.13 deg Celcius and it feels like 275.64 deg Celcius.");
 		}
 
 		// Assert that the condition is true
